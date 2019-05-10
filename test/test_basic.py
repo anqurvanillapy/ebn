@@ -6,13 +6,15 @@ from ebn.eval import reflect, reify, meaning, nbe
 class TestBasic(unittest.TestCase):
     def test_id(self):
         x = Term(TermEnum.Lam, ("x", Term(TermEnum.Var, "x")))
-        _ = nbe(
+        result = nbe(
             Type(
                 TypeEnum.Arrow,
                 (Type(TypeEnum.Unit, None), Type(TypeEnum.Unit, None)),
             ),
             x,
         )
+        expected = Term(TermEnum.Lam, ("0", Term(TermEnum.Var, "0")))
+        self.assertEqual(result, expected)
 
     def test_k(self):
         k = Term(

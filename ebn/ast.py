@@ -19,6 +19,11 @@ class AstNode(Generic[EnumT]):
     def __repr__(self):
         return f"AstNode(Type={self.e}, Value={self.v})"
 
+    def __eq__(self, other):
+        if not isinstance(other, AstNode):
+            return NotImplemented
+        return self.e == other.e and self.v == other.v
+
 
 class TypeEnum(Enum):
     Unit = auto()
